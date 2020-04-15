@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {quiz} from '../reducers/quiz'
 
 export const CurrentQuestion = () => {
   const question = useSelector((state) => state.quiz.questions[state.quiz.currentQuesionIndex])
+  const userDone = useSelector((state)=> state.quiz.quizOver)
 
   const [answer, setAnswer] = useState('')
   const dispatch = useDispatch()
@@ -37,6 +39,7 @@ const handleNext = (e) => {
        })}
      </select>
      <button type="button" onClick={handleNext}>press me</button>
+     {userDone && <Link to='/resultPage'>Finish Game</Link>}
       </form>
     </div>
   )
